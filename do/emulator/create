@@ -1,0 +1,6 @@
+#!/bin/bash
+source do/header
+log "Starting..."
+echo n | $androidExe create avd --name $emulatorName --target android-17 --abi armeabi-v7a
+log "Complete."
+

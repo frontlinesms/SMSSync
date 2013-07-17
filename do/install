@@ -1,0 +1,8 @@
+#!/bin/bash
+source do/header
+log "Starting..."
+do/emulator/run
+cd smssync
+ant debug install
+log "Complete."
+

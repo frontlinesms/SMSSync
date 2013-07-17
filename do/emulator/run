@@ -1,0 +1,8 @@
+#!/bin/bash
+source do/header
+log "Starting..."
+exec emulator @$emulatorName >/dev/null &
+log "Emulator running as a background task:"
+jobs -l
+log "Complete."
+

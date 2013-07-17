@@ -1,0 +1,7 @@
+#!/bin/bash
+source do/header
+log "Starting..."
+do/build
+do/install
+log "Complete."
+

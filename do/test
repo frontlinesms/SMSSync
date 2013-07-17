@@ -1,0 +1,3 @@
+#!/bin/bash
+cd smssync/tests
+ant clean instrument install test
