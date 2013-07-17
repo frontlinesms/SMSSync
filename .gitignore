@@ -1,6 +1,13 @@
 *.swp
+
+# ant build directories
 bin
 gen
+
+# local properties files for ant config
 local.properties
 secure.properties
+
+# generated log files
+*.log
 
