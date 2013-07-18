@@ -6,6 +6,15 @@ import org.addhen.smssync.test.BaseTestCase;
 import android.test.suitebuilder.annotation.SmallTest;
 
 public class UtilTestCase extends BaseTestCase {
+    private static String[] SUCCESSFUL_RESPONSES = {
+        "{\"payload\":{\"success\":\"true\",\"task\":\"send\",\"messages\":[{\"to\":\"098\",\"message\":\"who got the funk?\"}]}}",
+        "{\"payload\":{\"secret\":\"secret\",\"success\":\"true\",\"task\":\"send\",\"messages\":[]}}",
+        "{\"payload\":{\"secret\":\"secret\",\"success\":\"true\"}}"
+    };
+
+    private static String[] FAILED_RESPONSES = {
+        "{\"payload\":{\"success\":\"false\"}}"
+    };
 
     Long timestamp;
 
@@ -35,10 +44,23 @@ public class UtilTestCase extends BaseTestCase {
         }
     }
 
+    @SmallTest
+    public void testGetJsonSuccessStatus_success() {
+        for(String successfulResponse : SUCCESSFUL_RESPONSES) {
+            assertTrue(Util.getJsonSuccessStatus(successfulResponse));
+        }
+    }
+
+    @SmallTest
+    public void testGetJsonSuccessStatus_fail() {
+        for(String successfulResponse : FAILED_RESPONSES) {
+            assertFalse(Util.getJsonSuccessStatus(successfulResponse));
+        }
+    }
+
     @Override
     public void tearDown() {
         timestamp = null;
         expected = null;
     }
-
 }
