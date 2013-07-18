@@ -1,7 +1,8 @@
 #!/bin/bash
 source do/header
 log "Starting..."
-do/emulator/run
+log "TODO this should be able to start emulator if not already started... currently it can't cope with this."
+#do/emulator/run
 cd smssync
 ant debug install
 log "Complete."
