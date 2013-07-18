@@ -30,6 +30,7 @@ import java.security.NoSuchAlgorithmException;
 import org.addhen.smssync.util.Logger;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.params.ConnManagerPNames;
@@ -48,8 +49,8 @@ import android.content.Context;
 import android.content.pm.PackageManager.NameNotFoundException;
 
 public class MainHttpClient {
-
-    protected static DefaultHttpClient httpclient;
+    // TODO why is this static?  if static, why initialise in constructor?
+    protected static HttpClient httpclient;
 
     private HttpParams httpParameters;
 
@@ -63,7 +64,17 @@ public class MainHttpClient {
     private String versionName;
 
     public MainHttpClient(String url, Context context) {
+        this(url, context, true);
+    }
+
+    public MainHttpClient(String url, Context context, boolean initialise) {
         this.url = url;
+        if(initialise) {
+            initialise(context);
+        }
+    }
+
+    private void initialise(Context context) {
         try {
             versionName = context.getPackageManager().getPackageInfo(
                     context.getPackageName(), 0).versionName;
@@ -111,7 +122,6 @@ public class MainHttpClient {
                 httpParameters, schemeRegistry);
 
         httpclient = new DefaultHttpClient(manager, httpParameters);
-
     }
 
     public static HttpResponse GetURL(String URL) throws IOException {

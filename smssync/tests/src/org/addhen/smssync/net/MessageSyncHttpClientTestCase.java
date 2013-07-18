@@ -6,11 +6,31 @@ import org.addhen.smssync.test.BaseTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
-public class MessageSyncHttpClientTestCase extends BaseTestCase {
-	MessageSyncHttpClient client;
+import static org.mockito.Mockito.*;
 
-	public MessageSyncHttpClientTestCase() {
-		client = new MessageSyncHttpClient(null, null);
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageInfo;
+
+public class MessageSyncHttpClientTestCase extends BaseTestCase {
+	private static final String TEST_URL = "http://example.com/something";
+
+	/** instance of #{MessageSyncHttpClientTestCase} under test */
+	private final MessageSyncHttpClient client;
+	/** mock android context */
+	private final Context context;
+
+	public MessageSyncHttpClientTestCase() throws Exception {
+		context = mock(Context.class);
+
+//		PackageInfo packageInfo = mock(PackageInfo.class);
+
+//		PackageManager packageManager = mock(PackageManager.class);
+//		when(packageManager.getPackageInfo(anyString(), anyInt())).thenReturn(packageInfo);
+
+//		when(context.getPackageManager()).thenReturn(packageManager);
+
+		client = new MessageSyncHttpClient(context, TEST_URL, false);
 	}
 
 	@Override

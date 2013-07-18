@@ -50,7 +50,11 @@ public class MessageSyncHttpClient extends MainHttpClient {
 	private Context context;
 
 	public MessageSyncHttpClient(Context context, String url) {
-		super(url, context);
+		this(context, url, true);
+	}
+
+	public MessageSyncHttpClient(Context context, String url, boolean initialise) {
+		super(url, context, initialise);
 		this.context = context;
 	}
 
@@ -67,7 +71,7 @@ public class MessageSyncHttpClient extends MainHttpClient {
 		HttpPost httppost = new HttpPost(url);
 		httppost.addHeader("User-Agent", userAgent.toString());
 		try {
-
+// METHOD FOR UNIT TESTING
 			// Add your data
 
 			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
@@ -130,7 +134,7 @@ public class MessageSyncHttpClient extends MainHttpClient {
 					statusCode));
 
 			return false;
-
+// METHOD FOR UNIT TESTING
 		} catch (ClientProtocolException e) {
 			return false;
 		} catch (IOException e) {

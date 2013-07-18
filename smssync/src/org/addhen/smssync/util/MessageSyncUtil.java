@@ -261,7 +261,7 @@ public class MessageSyncUtil extends Util {
             if (!TextUtils.isEmpty(response) && response != null) {
 
                 try {
-
+// FOR UNIT TESTING
                     jsonObject = new JSONObject(response);
                     JSONObject payloadObject = jsonObject
                             .getJSONObject("payload");
@@ -287,7 +287,7 @@ public class MessageSyncUtil extends Util {
                              // response
                         log(context.getString(R.string.no_task));
                     }
-
+// END UNIT TEST METHOD
                 } catch (JSONException e) {
                     log("Error: " + e.getMessage());
                 }

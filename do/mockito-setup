@@ -1,0 +1,33 @@
+#!/bin/bash
+source do/header
+log "Starting..."
+
+testLibDir=smssync/tests/libs
+log "Creating test lib dir at $testLibDir..."
+mkdir -p $testLibDir
+cd $testLibDir
+
+log "Adding gitignore file to prevent big files ending up in version control..."
+cat > .gitignore << EOF
+# mockito test dependencies
+mockito-*.jar
+dexmaker-*.jar
+EOF
+
+log "Fetching mockito dependencies..."
+function download {
+	local sourceUrl="$@"
+	local filename=${sourceUrl##*/}
+	log "Downloading $filename from $sourceUrl..."
+	if [[ -f $filename ]]; then
+		log "File already exists.  Download cancelled."
+	else
+		wget $sourceUrl
+		log "Downloaded."
+	fi
+}
+download http://dexmaker.googlecode.com/files/dexmaker-1.0.jar
+download https://mockito.googlecode.com/files/mockito-all-1.9.5.jar
+download http://dexmaker.googlecode.com/files/dexmaker-mockito-1.0.jar
+
+log "Complete."
